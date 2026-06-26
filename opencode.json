@@ -1,0 +1,23 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "provider": {
+        "openai": {
+            "models": {
+                "gpt-5.5": {
+                    "reasoning": true,
+                    "variants": {
+                        "xhigh": {
+                            "reasoningEffort": "xhigh",
+                            "reasoningSummary": "auto"
+                        },
+                        "high": {
+                            "reasoningEffort": "high",
+                            "reasoningSummary": "auto"
+                        }
+                    },
+                    "name": "GPT-5.5"
+                },
+            }
+        }
+    }
+}

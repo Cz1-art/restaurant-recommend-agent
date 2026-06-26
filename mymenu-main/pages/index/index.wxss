@@ -1,0 +1,197 @@
+/* pages/index/index.wxss */
+/* 搜索栏 */
+.search-bar {
+  padding: 16rpx 20rpx;
+  background: #fff;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 0 24rpx;
+  height: 68rpx;
+}
+
+.search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 26rpx;
+  height: 100%;
+}
+
+.search-clear {
+  font-size: 36rpx;
+  color: #999;
+  padding: 4rpx 8rpx;
+  flex-shrink: 0;
+}
+
+.category-scroll {
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 20rpx;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.category-list {
+  display: flex;
+  gap: 20rpx;
+}
+
+.category-item {
+  padding: 16rpx 32rpx;
+  border-radius: 30rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 28rpx;
+  transition: all 0.3s;
+}
+
+.category-item.active {
+  background-color: #ff6b35;
+  color: #fff;
+}
+
+/* 分类/口味切换标签 */
+.filter-tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.filter-tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #999;
+  position: relative;
+}
+
+.filter-tab.active {
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.filter-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: #ff6b35;
+  border-radius: 2rpx;
+}
+
+.fav-tab { color: #ff4d4f; }
+.fav-tab.active { color: #ff4d4f; }
+.fav-tab.active::after { background: #ff4d4f; }
+
+.flavor-scroll { background-color: #fff8f5; }
+
+.flavor-item {
+  background-color: #fff0e8;
+  color: #ff6b35;
+}
+
+.flavor-item.active {
+  background: linear-gradient(135deg, #ff6b35, #ff8f5e);
+  color: #fff;
+}
+
+.dish-list {
+  padding: 20rpx;
+}
+
+.dish-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.dish-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background-color: #f0f0f0;
+  margin-right: 20rpx;
+}
+
+.dish-info {
+  flex: 1;
+}
+
+.dish-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.dish-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.dish-price {
+  font-size: 32rpx;
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.dish-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.flavor-tag {
+  font-size: 20rpx;
+  color: #ff6b35;
+  background-color: #fff5f0;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #ffcdc0;
+}
+
+.dish-actions {
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.fav-btn {
+  font-size: 36rpx;
+  color: #ddd;
+  padding: 4rpx;
+}
+.fav-btn.active { color: #ff4d4f; }
+.fav-btn:active { transform: scale(1.2); }
+
+.add-btn {
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #ff6b35;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.add-btn:active { background-color: #e55a2b; }

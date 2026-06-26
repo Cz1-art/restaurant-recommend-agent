@@ -1,0 +1,9 @@
+{
+  "desc": "关于本文件",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

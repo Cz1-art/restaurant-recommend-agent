@@ -1,0 +1,61 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <scroll-view scroll-x class="category-scroll">
+    <view class="category-list">
+      <view wx:for="{{tabs}}" wx:key="key" class="category-item {{currentTab === item.key ? 'active' : ''}}" bindtap="switchTab" data-tab="{{item.key}}">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{orders.length > 0}}">
+    <view class="order-list">
+      <view class="order-item card" wx:for="{{orders}}" wx:key="id">
+        <view class="order-header">
+          <text class="order-id">#{{item.order_no}}</text>
+          <text class="order-status status-{{item.status}}">{{getStatusText(item.status)}}</text>
+        </view>
+        <view class="order-content">
+          <view class="order-dish" wx:for="{{item.items}}" wx:for-item="d" wx:key="id">
+            <text>{{d.dish_name}} × {{d.quantity}}</text>
+            <text class="dish-total">¥{{d.subtotal}}</text>
+          </view>
+          <view wx:if="{{item.remark}}" class="order-remark">📝 {{item.remark}}</view>
+        </view>
+        <view class="order-footer">
+          <view class="order-footer-left">
+            <text class="order-time">{{item.created_at}}</text>
+            <text wx:if="{{item.status === 'pending'}}" class="cancel-link" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</text>
+          </view>
+          <view class="order-footer-right">
+            <text class="order-total">¥{{item.total_price}}</text>
+            <view wx:if="{{item.status === 'pending'}}" class="pay-btn" bindtap="payOrder" data-id="{{item.id}}">去支付</view>
+            <view wx:if="{{item.status === 'done'}}" class="review-btn" bindtap="openReview" data-id="{{item.id}}">⭐ 评价</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-tip">
+    <image class="empty-icon" src="/images/empty-order.png" mode="aspectFit"></image>
+    <view>暂无订单</view>
+  </view>
+
+  <view class="order-bottom-bar">
+    <view class="logout-btn" bindtap="logout">退出登录</view>
+  </view>
+
+  <!-- 评价弹窗 -->
+  <view class="modal-mask" wx:if="{{showReviewModal}}" bindtap="closeReview"></view>
+  <view class="review-modal" wx:if="{{showReviewModal}}">
+    <view class="review-title">⭐ 评价菜品</view>
+    <view class="review-dish" wx:for="{{reviewDishes}}" wx:for-item="d" wx:key="id">
+      <view class="review-dish-name">{{d.dish_name}}</view>
+      <view class="review-stars">
+        <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this" class="star {{reviewRating >= item ? 'active' : ''}}" bindtap="setRating" data-rating="{{item}}">★</text>
+      </view>
+      <input class="review-input" placeholder="说点什么..." bindinput="onReviewInput"/>
+      <view class="review-submit-btn" bindtap="submitReview" data-dishid="{{d.dish_id}}">提交评价</view>
+    </view>
+    <view class="review-close" bindtap="closeReview">关闭</view>
+  </view>
+</view>

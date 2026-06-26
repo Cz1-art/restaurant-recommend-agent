@@ -1,0 +1,48 @@
+<!--pages/cart/cart.wxml-->
+<view class="container">
+  <view wx:if="{{cart.length > 0}}">
+    <view class="cart-list">
+      <view class="cart-item card" wx:for="{{cart}}" wx:key="id">
+        <image class="cart-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="cart-info">
+          <view class="cart-name">{{item.name}}</view>
+          <view class="cart-price">¥{{item.price}}</view>
+        </view>
+        <view class="quantity-control">
+          <view class="qty-btn" bindtap="decreaseQty" data-dishid="{{item.dish_id}}">-</view>
+          <view class="qty-num">{{item.quantity}}</view>
+          <view class="qty-btn" bindtap="increaseQty" data-dishid="{{item.dish_id}}">+</view>
+        </view>
+        <view class="delete-btn" bindtap="deleteItem" data-dishid="{{item.dish_id}}">×</view>
+      </view>
+    </view>
+    
+    <!-- 餐桌选择 -->
+    <view class="remark-section">
+      <view class="remark-label">选择餐桌</view>
+      <picker mode="selector" range="{{tables}}" range-key="table_no" bindchange="onTableChange">
+        <view class="picker-value">{{selectedTableName}}</view>
+      </picker>
+    </view>
+
+    <!-- 备注输入 -->
+    <view class="remark-section">
+      <view class="remark-label">订单备注</view>
+      <input class="remark-input" placeholder="如：少放辣、不要葱、特殊要求..." value="{{remark}}" bindinput="onRemarkInput"/>
+    </view>
+
+    <view class="footer-bar">
+      <view class="total-info">
+        <text>合计：</text>
+        <text class="total-price">¥{{totalPrice}}</text>
+      </view>
+      <view class="checkout-btn" bindtap="checkout">去结算 ({{totalCount}})</view>
+    </view>
+  </view>
+  
+  <view wx:else class="empty-cart">
+    <image class="empty-icon" src="/images/empty-cart.png" mode="aspectFit"></image>
+    <view class="empty-text">购物车为空</view>
+    <view class="go-menu" bindtap="goMenu">去点餐</view>
+  </view>
+</view>

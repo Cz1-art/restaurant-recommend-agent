@@ -1,0 +1,31 @@
+<!--pages/category/category.wxml-->
+<view class="container">
+  <view class="category-manage">
+    <view class="section-title">分类列表</view>
+    <view class="category-list">
+      <view class="category-row" wx:for="{{categories}}" wx:key="id">
+        <view class="drag-handle">⋮⋮</view>
+        <view class="category-name">{{item.name}}</view>
+        <view class="category-actions">
+          <text class="action-btn edit" bindtap="editCategory" data-category="{{item}}">编辑</text>
+          <text class="action-btn delete" bindtap="deleteCategory" data-id="{{item.id}}">删除</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="add-category card" bindtap="addCategory">
+      <text>+ 添加分类</text>
+    </view>
+  </view>
+  
+  <!-- 添加/编辑分类弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" bindtap="closeModal"></view>
+  <view class="modal-content" wx:if="{{showModal}}">
+    <view class="modal-title">{{isEdit ? '编辑分类' : '添加分类'}}</view>
+    <input class="modal-input" placeholder="请输入分类名称" value="{{modalName}}" bindinput="onNameInput"/>
+    <view class="modal-actions">
+      <view class="modal-btn cancel" bindtap="closeModal">取消</view>
+      <view class="modal-btn confirm" bindtap="saveCategory">保存</view>
+    </view>
+  </view>
+</view>

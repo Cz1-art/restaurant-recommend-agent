@@ -1,0 +1,169 @@
+<!--pages/recommend/recommend.wxml-->
+<view class="container">
+  <!-- 桌号信息 -->
+  <view class="table-info-bar" bindtap="changeTable">
+    <text class="table-info-icon">🍽️</text>
+    <text class="table-info-text">{{selectedTable ? selectedTable.table_no : '请选择餐桌'}}</text>
+    <text class="table-info-arrow">›</text>
+  </view>
+
+  <!-- 顶部横幅 -->
+  <view class="banner" bindtap="goChat">
+    <view class="banner-text">
+      <view class="banner-title">智能推荐</view>
+      <view class="banner-desc">为你精选好菜</view>
+    </view>
+    <view class="banner-icon-wrapper">
+      <view class="banner-icon">🔥</view>
+      <view class="banner-chat-hint">点击与AI助手聊天</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-tip">加载中...</view>
+
+  <view wx:if="{{!loading}}">
+    <!-- 好评推荐 -->
+    <view class="section" wx:if="{{ratedDishes.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="section-icon">⭐</text> 好评推荐
+        </view>
+        <view class="section-tag" style="background:#faad14;">评分最高</view>
+      </view>
+      <view class="dish-list">
+        <view class="dish-item card" wx:for="{{ratedDishes}}" wx:key="id">
+          <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="dish-info">
+            <view class="dish-name">{{item.name}}</view>
+            <view class="dish-desc">{{item.description}}</view>
+            <view class="dish-meta">
+              <view class="dish-price">¥{{item.price}}</view>
+              <text wx:if="{{item.flavor}}" class="flavor-tag">{{item.flavor}}</text>
+              <text wx:if="{{item.avg_rating}}" class="rating-star">⭐ {{item.avg_rating}}</text>
+            </view>
+          </view>
+          <view class="dish-actions">
+            <view class="add-btn" bindtap="addToCart" data-dish="{{item}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 猜你喜欢 -->
+    <view class="section" wx:if="{{guessDishes.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="section-icon">❤️</text> 猜你喜欢
+        </view>
+        <view class="section-tag" style="background:#ff6b35;">为你推荐</view>
+      </view>
+      <scroll-view scroll-x class="dish-scroll">
+        <view class="dish-scroll-inner">
+          <view class="dish-card" wx:for="{{guessDishes}}" wx:key="id">
+            <image class="dish-img" src="{{item.image}}" mode="aspectFill"></image>
+            <view wx:if="{{item.flavor}}" class="guess-flavor">{{item.flavor}}</view>
+            <view class="dish-name">{{item.name}}</view>
+            <view class="dish-bottom">
+              <view class="dish-price">¥{{item.price}}</view>
+              <view class="add-btn" bindtap="addToCart" data-dish="{{item}}">+</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 人气热销 -->
+    <view class="section" wx:if="{{hotDishes.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="section-icon">🏆</text> 人气热销
+        </view>
+        <view class="section-badge">TOP {{hotDishes.length}}</view>
+      </view>
+      <scroll-view scroll-x class="dish-scroll">
+        <view class="dish-scroll-inner">
+          <view class="dish-card" wx:for="{{hotDishes}}" wx:key="id">
+            <image class="dish-img" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="dish-badge">已售{{item.sales}}份</view>
+            <view class="dish-name">{{item.name}}</view>
+            <view class="dish-bottom">
+              <view class="dish-price">¥{{item.price}}</view>
+              <view class="add-btn" bindtap="addToCart" data-dish="{{item}}">+</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 新品推荐 -->
+    <view class="section" wx:if="{{newDishes.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="section-icon">✨</text> 新品推荐
+        </view>
+        <view class="section-tag">NEW</view>
+      </view>
+      <view class="dish-list">
+        <view class="dish-item card" wx:for="{{newDishes}}" wx:key="id">
+          <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="dish-info">
+            <view class="dish-name">{{item.name}}</view>
+            <view class="dish-desc">{{item.description}}</view>
+            <view class="dish-meta">
+              <view class="dish-price">¥{{item.price}}</view>
+              <text wx:if="{{item.flavor}}" class="flavor-tag">{{item.flavor}}</text>
+            </view>
+          </view>
+          <view class="dish-actions">
+            <view class="add-btn" bindtap="addToCart" data-dish="{{item}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 搭配推荐 -->
+    <view class="section" wx:if="{{comboDishes.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="section-icon">🍽️</text> 搭配推荐
+        </view>
+      </view>
+      <view class="combo-list">
+        <view class="combo-card card" wx:for="{{comboDishes}}" wx:key="id">
+          <view class="combo-header">
+            <view class="combo-name">{{item.name}}</view>
+            <view class="combo-price">¥{{item.totalPrice}}</view>
+          </view>
+          <view class="combo-dishes">
+            <view class="combo-dish" wx:for="{{item.dishes}}" wx:for-item="d" wx:key="id">
+              <image class="combo-dish-img" src="{{d.image}}" mode="aspectFill"></image>
+              <text class="combo-dish-name">{{d.name}}</text>
+            </view>
+          </view>
+          <view class="combo-action">
+            <view class="combo-add-btn" bindtap="addCombo" data-combo="{{item}}">一键加入购物车</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{hotDishes.length === 0 && newDishes.length === 0 && comboDishes.length === 0 && guessDishes.length === 0 && ratedDishes.length === 0}}" class="empty-tip">
+      <view class="empty-icon">📋</view>
+      <view>暂无推荐，去看看菜单吧</view>
+      <view class="go-menu-btn" bindtap="goMenu">浏览菜单</view>
+    </view>
+  </view>
+
+  <!-- 选桌弹窗 -->
+  <view class="modal-mask" wx:if="{{showTablePicker}}" bindtap=""></view>
+  <view class="table-picker-modal" wx:if="{{showTablePicker}}">
+    <view class="table-picker-title">🍽️ 请选择您的餐桌</view>
+    <view class="table-picker-sub">方便服务员为您送餐到桌</view>
+    <picker class="table-picker" mode="selector" range="{{tables}}" range-key="table_no" bindchange="selectTable">
+      <view class="table-picker-btn" wx:if="{{tables.length > 0}}">点击选择餐桌</view>
+      <view class="table-picker-btn disabled" wx:else>暂无空闲餐桌</view>
+    </picker>
+    <view class="table-skip" bindtap="skipTable">跳过，不选桌号</view>
+  </view>
+</view>

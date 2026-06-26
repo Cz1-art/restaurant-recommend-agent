@@ -1,0 +1,74 @@
+<!--pages/chat/chat.wxml-->
+<view class="chat-container">
+  <!-- 顶部标题栏 -->
+  <view class="chat-header">
+    <view class="header-back" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <view class="header-title">智能点餐助手</view>
+    <view class="header-status">在线</view>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view
+    class="chat-messages"
+    scroll-y
+    scroll-into-view="{{scrollToView}}"
+    scroll-with-animation
+  >
+    <view wx:for="{{messages}}" wx:key="id" id="{{item.id === messages[messages.length-1].id ? 'msg-bottom' : ''}}">
+      <!-- 用户消息 -->
+      <view wx:if="{{item.role === 'user'}}" class="msg-row msg-user">
+        <view class="msg-bubble user-bubble">
+          <text>{{item.content}}</text>
+        </view>
+        <view class="msg-avatar user-avatar">我</view>
+      </view>
+
+      <!-- AI消息 -->
+      <view wx:if="{{item.role === 'assistant'}}" class="msg-row msg-ai">
+        <view class="msg-avatar ai-avatar">味</view>
+        <view class="msg-bubble ai-bubble">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+
+      <view class="msg-time">{{item.time}}</view>
+    </view>
+
+    <!-- 输入中提示 -->
+    <view wx:if="{{sending}}" class="msg-row msg-ai">
+      <view class="msg-avatar ai-avatar">味</view>
+      <view class="msg-bubble ai-bubble typing-bubble">
+        <view class="typing-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 快捷提问 -->
+  <view class="quick-questions" wx:if="{{!sending}}">
+    <view class="quick-btn" bindtap="quickAsk" data-question="推荐几道菜">🔥 推荐菜品</view>
+    <view class="quick-btn" bindtap="quickAsk" data-question="有什么辣的菜">🌶️ 辣味推荐</view>
+    <view class="quick-btn" bindtap="quickAsk" data-question="有什么实惠的菜">💰 实惠菜品</view>
+  </view>
+
+  <!-- 输入框 -->
+  <view class="chat-input-bar">
+    <input
+      class="chat-input"
+      placeholder="问我关于菜品的问题..."
+      value="{{inputText}}"
+      bindinput="onInputChange"
+      bindconfirm="sendMessage"
+      confirm-type="send"
+      disabled="{{sending}}"
+    />
+    <view class="send-btn {{inputText.trim() && !sending ? 'active' : ''}}" bindtap="sendMessage">
+      发送
+    </view>
+  </view>
+</view>

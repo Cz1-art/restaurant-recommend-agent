@@ -1,0 +1,94 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "disabled_providers": [],
+    "provider": {
+        "deofox": {
+            "name": "Deofox",
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "https://api.deofox.com/v1"
+            },
+            "models": {
+                "gpt-5.5": {
+                    "reasoning": true,
+                    "tool_call": true,
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "cost": {
+                        "input": 5,
+                        "output": 25,
+                        "cache_read": 0.5
+                    },
+                    "variants": {
+                        "xhigh": {
+                            "reasoningEffort": "xhigh",
+                            "reasoningSummary": "auto"
+                        },
+                        "high": {
+                            "reasoningEffort": "high",
+                            "reasoningSummary": "auto"
+                        }
+                    },
+                    "name": "GPT-5.5"
+                },
+                "deepseek-v4-pro": {
+                    "name": "DeepSeek V4 Pro",
+                    "attachment": true,
+                    "reasoning": true,
+                    "interleaved": {
+                        "field": "reasoning_content"
+                    },
+                    "modalities": {
+                        "input": [
+                            "text"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "limit": {
+                        "context": 1000000,
+                        "output": 384000
+                    },
+                    "options": {
+                        "extra_body": {
+                            "thinking": {
+                                "type": "disabled"
+                            }
+                        }
+                    },
+                    "variants": {
+                        "high": {
+                            "reasoning_effort": "high",
+                            "extra_body": {
+                                "thinking": {
+                                    "type": "enabled"
+                                }
+                            }
+                        },
+                        "xhigh": {
+                            "reasoning_effort": "max",
+                            "extra_body": {
+                                "thinking": {
+                                    "type": "enabled"
+                                }
+                            }
+                        }
+                    },
+                    "cost": {
+                        "input": 0.44,
+                        "output": 0.88,
+                        "cache_read": 0.0037
+                    }
+                }
+            }
+        }
+    }
+}

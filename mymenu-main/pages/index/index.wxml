@@ -1,0 +1,55 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索菜品..." value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search"/>
+      <text wx:if="{{searchKeyword}}" class="search-clear" bindtap="clearSearch">×</text>
+    </view>
+  </view>
+
+  <!-- 分类/口味/收藏 切换 -->
+  <view class="filter-tabs">
+    <view class="filter-tab {{filterMode === 'category' ? 'active' : ''}}" bindtap="switchFilterMode" data-mode="category">分类</view>
+    <view class="filter-tab {{filterMode === 'flavor' ? 'active' : ''}}" bindtap="switchFilterMode" data-mode="flavor">口味</view>
+    <view class="filter-tab fav-tab {{showFavOnly ? 'active' : ''}}" bindtap="toggleFavOnly">❤️ 收藏</view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view scroll-x class="category-scroll" wx:if="{{filterMode === 'category'}}">
+    <view class="category-list">
+      <view class="category-item {{currentCategoryId === 0 ? 'active' : ''}}" bindtap="switchCategory" data-id="0">全部</view>
+      <view wx:for="{{categories}}" wx:key="id" class="category-item {{currentCategoryId === item.id ? 'active' : ''}}" bindtap="switchCategory" data-id="{{item.id}}">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 口味标签 -->
+  <scroll-view scroll-x class="category-scroll flavor-scroll" wx:if="{{filterMode === 'flavor'}}">
+    <view class="category-list">
+      <view class="category-item {{currentFlavor === '' ? 'active' : ''}}" bindtap="switchFlavor" data-flavor="">全部</view>
+      <view wx:for="{{flavors}}" wx:key="*this" class="category-item flavor-item {{currentFlavor === item ? 'active' : ''}}" bindtap="switchFlavor" data-flavor="{{item}}">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 菜品列表 -->
+  <view class="dish-list">
+    <view class="dish-item card" wx:for="{{filteredDishes}}" wx:key="id">
+      <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="dish-info">
+        <view class="dish-name">{{item.name}}</view>
+        <view class="dish-desc">{{item.description}}</view>
+        <view class="dish-meta">
+          <view class="dish-price">¥{{item.price}}</view>
+          <text wx:if="{{item.flavor}}" class="flavor-tag">{{item.flavor}}</text>
+        </view>
+      </view>
+      <view class="dish-actions">
+        <text class="fav-btn {{favIds[item.id] ? 'active' : ''}}" bindtap="toggleFavorite" data-id="{{item.id}}">♡</text>
+        <view class="add-btn" bindtap="addToCart" data-dish="{{item}}">+</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{filteredDishes.length === 0}}" class="empty-tip">暂无菜品</view>
+</view>

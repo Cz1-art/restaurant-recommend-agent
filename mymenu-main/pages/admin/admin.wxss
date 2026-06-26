@@ -1,0 +1,337 @@
+/* pages/admin/admin.wxss */
+.admin-section {
+  padding-bottom: 40rpx;
+}
+
+/* 权限不足页面 */
+.no-permission {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 160rpx 40rpx;
+}
+
+.no-perm-icon {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+
+.no-perm-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.no-perm-desc {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.no-perm-hint {
+  font-size: 24rpx;
+  color: #bbb;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 20rpx 0;
+}
+
+.dish-manage-list {
+  margin-bottom: 30rpx;
+}
+
+.dish-manage-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.dish-thumb {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+  margin-right: 20rpx;
+}
+
+.dish-manage-info {
+  flex: 1;
+}
+
+.dish-manage-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.dish-manage-price {
+  font-size: 28rpx;
+  color: #ff6b35;
+}
+
+.dish-manage-meta {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 6rpx;
+}
+
+.dish-flavor-tag {
+  font-size: 20rpx;
+  color: #ff6b35;
+  background-color: #fff5f0;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #ffcdc0;
+}
+
+.dish-manage-category {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.dish-manage-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 12rpx 20rpx;
+  border-radius: 6rpx;
+}
+
+.action-btn.edit {
+  color: #ff6b35;
+  background-color: #fff5f0;
+}
+
+.action-btn.delete {
+  color: #ff4d4f;
+  background-color: #fff1f0;
+}
+
+.add-dish-btn {
+  background-color: #ff6b35;
+  color: white;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+}
+
+.add-dish-btn:active {
+  background-color: #e55a2b;
+}
+
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  width: 85%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 101;
+}
+
+.dish-modal {
+  width: 90%;
+}
+
+.modal-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.form-group {
+  margin-bottom: 24rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.form-input {
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+}
+
+.picker-value {
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.picker-value.placeholder {
+  color: #bbb;
+}
+
+.image-picker {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #999;
+  overflow: hidden;
+}
+
+.image-picker image {
+  width: 100%;
+  height: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+}
+
+.modal-btn.cancel {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.modal-btn.confirm {
+  background-color: #ff6b35;
+  color: #fff;
+}
+
+/* ===== 角色头部 ===== */
+.role-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.role-badge {
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+  color: #fff;
+}
+
+.role-admin { background: #ff6b35; }
+.role-staff { background: #52c41a; }
+
+.logout-btn {
+  font-size: 24rpx;
+  color: #999;
+  padding: 12rpx 28rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 20rpx;
+}
+
+.logout-btn:active { background: #f5f5f5; }
+
+/* ===== 订单标签 ===== */
+.order-tabs { white-space: nowrap; padding: 10rpx 0; }
+.order-tab-list { display: flex; gap: 16rpx; }
+.order-tab-item {
+  padding: 12rpx 28rpx;
+  border-radius: 24rpx;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 26rpx;
+}
+.order-tab-item.active { background: #ff6b35; color: #fff; }
+
+/* ===== 订单列表（管理页） ===== */
+.order-list { padding: 0; }
+.order-item { padding: 0; overflow: hidden; margin-bottom: 20rpx; }
+.order-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16rpx 20rpx; background: #fafafa; border-bottom: 1rpx solid #f0f0f0;
+}
+.order-id { font-size: 24rpx; color: #666; }
+.order-status { font-size: 26rpx; font-weight: bold; }
+.status-pending { color: #ff6b35; }
+.status-paid { color: #52c41a; }
+.status-cooking { color: #1890ff; }
+.status-done { color: #999; }
+.status-cancelled { color: #ff4d4f; }
+.order-content { padding: 16rpx 20rpx; }
+.order-dish {
+  display: flex; justify-content: space-between;
+  padding: 6rpx 0; font-size: 26rpx;
+}
+.dish-total { color: #ff6b35; }
+.order-remark {
+  margin-top: 10rpx; padding: 10rpx 14rpx;
+  background: #fff8f5; border-radius: 6rpx;
+  font-size: 24rpx; color: #ff6b35;
+  border-left: 4rpx solid #ff6b35;
+}
+.order-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12rpx 20rpx; background: #fafafa; border-top: 1rpx solid #f0f0f0;
+}
+.order-time { font-size: 22rpx; color: #999; }
+.order-total { font-size: 28rpx; color: #ff6b35; font-weight: bold; }
+.order-actions {
+  display: flex; gap: 12rpx; padding: 12rpx 20rpx;
+  border-top: 1rpx solid #f0f0f0; background: #fafafa;
+}
+.chef-btn {
+  padding: 10rpx 28rpx; border-radius: 20rpx;
+  font-size: 24rpx; font-weight: bold; color: #fff;
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+}
+.chef-btn.done-btn { background: linear-gradient(135deg, #52c41a, #73d13d); }
+.empty-tip-orders { text-align: center; padding: 60rpx 0; color: #999; font-size: 28rpx; }
+
+/* ===== 餐桌管理 ===== */
+.table-grid { display: flex; flex-wrap: wrap; gap: 16rpx; margin-bottom: 20rpx; }
+.table-card {
+  width: calc(50% - 8rpx); background: #fff; border-radius: 12rpx;
+  padding: 20rpx; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  display: flex; flex-direction: column; align-items: center; gap: 6rpx;
+}
+.table-no { font-size: 30rpx; font-weight: bold; color: #333; }
+.table-cap { font-size: 24rpx; color: #999; }
+.table-status { font-size: 22rpx; padding: 4rpx 16rpx; border-radius: 16rpx; }
+.table-status.status-free { background: #f6ffed; color: #52c41a; }
+.table-status.status-occupied { background: #fff7e6; color: #d46b08; }
+.table-status.status-reserved { background: #e6f7ff; color: #1890ff; }
+.table-actions { display: flex; gap: 12rpx; margin-top: 8rpx; }
+.table-actions .action-btn { padding: 6rpx 18rpx; font-size: 22rpx; }

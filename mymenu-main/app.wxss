@@ -1,0 +1,88 @@
+/**app.wxss**/
+page {
+  background-color: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.container {
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+}
+
+.btn-primary:active {
+  background-color: #e55a2b;
+}
+
+.btn-danger {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+}
+
+.btn-default {
+  background-color: #fff;
+  color: #333;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.input-group label {
+  width: 160rpx;
+  color: #666;
+}
+
+.input-group input, .input-group textarea {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  padding: 60rpx 0;
+}
+
+.price {
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.badge {
+  background-color: #ff6b35;
+  color: white;
+  border-radius: 50%;
+  padding: 4rpx 12rpx;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}

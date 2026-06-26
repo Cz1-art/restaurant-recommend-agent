@@ -1,0 +1,166 @@
+<mxfile host="CodeBuddy">
+  <diagram name="智能点餐系统用例图" id="0">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ===== 系统边界 ===== -->
+        <mxCell id="sys" value="智能点餐系统" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;dashed=1;dashPattern=8 4;fillColor=none;strokeColor=#333333;strokeWidth=2;fontSize=16;fontStyle=1;verticalAlign=top;align=left;spacingTop=8;spacingLeft=8;arcSize=12;" parent="1" vertex="1">
+          <mxGeometry x="320" y="140" width="500" height="540" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 系统用例 ===== -->
+
+        <!-- 浏览菜单 -->
+        <mxCell id="uc1" value="浏览菜单" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff5f0;strokeColor=#ff6b35;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="450" y="170" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 下单支付 -->
+        <mxCell id="uc2" value="下单支付" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff5f0;strokeColor=#ff6b35;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="450" y="230" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 取消订单 -->
+        <mxCell id="uc3" value="取消订单" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff5f0;strokeColor=#ff6b35;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="590" y="170" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- AI聊天 -->
+        <mxCell id="uc4" value="AI智能聊天" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0f5ff;strokeColor=#1890ff;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="590" y="230" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 查看我的订单 -->
+        <mxCell id="uc5" value="查看我的订单" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff5f0;strokeColor=#ff6b35;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="450" y="290" width="110" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- 查看所有订单 -->
+        <mxCell id="uc6" value="查看所有订单&#10;&amp; 备注" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0fff0;strokeColor=#52c41a;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="360" y="370" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <!-- 开始制作 -->
+        <mxCell id="uc7" value="开始制作" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0fff0;strokeColor=#52c41a;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="510" y="370" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 完成制作 -->
+        <mxCell id="uc8" value="完成制作" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0fff0;strokeColor=#52c41a;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="510" y="430" width="110" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- 菜品管理 -->
+        <mxCell id="uc9" value="菜品管理&#10;（增删改查）" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff0f0;strokeColor=#ff4d4f;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="360" y="510" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <!-- 分类管理 -->
+        <mxCell id="uc10" value="分类管理" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff0f0;strokeColor=#ff4d4f;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="510" y="510" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 账号管理 -->
+        <mxCell id="uc11" value="账号管理" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff0f0;strokeColor=#ff4d4f;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="510" y="570" width="110" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 变更订单状态 -->
+        <mxCell id="uc12" value="变更订单状态" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff0f0;strokeColor=#ff4d4f;strokeWidth=2;fontSize=13;fontColor=#333;" parent="1" vertex="1">
+          <mxGeometry x="360" y="430" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 角色 ===== -->
+
+        <!-- 顾客 -->
+        <mxCell id="actor_customer" value="顾客&#10;customer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=13;fillColor=#ff6b35;strokeColor=#e55a2b;fontColor=#fff;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="60" y="190" width="50" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 服务员 -->
+        <mxCell id="actor_waiter" value="服务员&#10;waiter" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=13;fillColor=#1890ff;strokeColor=#096dd9;fontColor=#fff;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="360" width="50" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 厨师 -->
+        <mxCell id="actor_chef" value="厨师&#10;chef" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=13;fillColor=#52c41a;strokeColor=#389e0d;fontColor=#fff;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="260" y="360" width="50" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 管理员 -->
+        <mxCell id="actor_admin" value="管理员&#10;admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=13;fillColor=#ff4d4f;strokeColor=#cf1322;fontColor=#fff;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="510" width="50" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 连线：顾客 ===== -->
+        <mxCell id="l_c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff6b35;strokeWidth=2;" parent="1" source="actor_customer" target="uc1" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff6b35;strokeWidth=2;" parent="1" source="actor_customer" target="uc2" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff6b35;strokeWidth=2;" parent="1" source="actor_customer" target="uc3" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1890ff;strokeWidth=2;" parent="1" source="actor_customer" target="uc4" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_c5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff6b35;strokeWidth=2;" parent="1" source="actor_customer" target="uc5" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 连线：服务员 ===== -->
+        <mxCell id="l_w1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1890ff;strokeWidth=2;" parent="1" source="actor_waiter" target="uc6" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 连线：厨师 ===== -->
+        <mxCell id="l_k1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#52c41a;strokeWidth=2;" parent="1" source="actor_chef" target="uc6" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_k2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#52c41a;strokeWidth=2;" parent="1" source="actor_chef" target="uc7" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_k3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#52c41a;strokeWidth=2;" parent="1" source="actor_chef" target="uc8" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 连线：管理员 ===== -->
+        <mxCell id="l_a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc9" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc10" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc11" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc6" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc12" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc7" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="l_a7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ff4d4f;strokeWidth=2;" parent="1" source="actor_admin" target="uc8" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== 图例 ===== -->
+        <mxCell id="legend" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="60" y="600" width="260" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend_bg" value="图例" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fillColor=#fff;strokeColor=#ccc;fontSize=13;fontStyle=1;verticalAlign=top;paddingTop=8;paddingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="60" y="600" width="220" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_c" value="顾客" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fillColor=#ff6b35;strokeColor=#e55a2b;fontColor=#fff;" parent="1" vertex="1">
+          <mxGeometry x="80" y="620" width="20" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_w" value="服务员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fillColor=#1890ff;strokeColor=#096dd9;fontColor=#fff;" parent="1" vertex="1">
+          <mxGeometry x="145" y="620" width="20" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_k" value="厨师" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fillColor=#52c41a;strokeColor=#389e0d;fontColor=#fff;" parent="1" vertex="1">
+          <mxGeometry x="210" y="620" width="20" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_a" value="管理员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fillColor=#ff4d4f;strokeColor=#cf1322;fontColor=#fff;" parent="1" vertex="1">
+          <mxGeometry x="80" y="670" width="20" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

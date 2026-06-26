@@ -1,0 +1,57 @@
+﻿version: "3.8"
+
+services:
+  # ============ 前端构建 ============
+  builder:
+    image: node:20-alpine
+    container_name: restaurant-builder
+    working_dir: /app
+    volumes:
+      - ./agent-web:/app
+      - frontend_dist:/app/dist
+    command: sh -c "npm install && npm run build"
+
+  # ============ FastAPI 后端 ============
+  agent:
+    build: ./recommend-agent
+    container_name: restaurant-agent
+    restart: unless-stopped
+    environment:
+      - API_PREFIX=/api/v1
+      - DIFY_BASE_URL=${DIFY_BASE_URL}
+      - DIFY_API_KEY=${DIFY_API_KEY}
+      - DIFY_TIMEOUT_SECONDS=120
+      - AMAP_API_KEY=${AMAP_API_KEY}
+      - AMAP_STATIC_MAP_KEY=${AMAP_STATIC_MAP_KEY}
+      - AMAP_PLACE_RADIUS=3000
+      - DEEPSEEK_BASE_URL=${DEEPSEEK_BASE_URL}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - DEEPSEEK_MODEL=deepseek-chat
+      - DEEPSEEK_TIMEOUT_SECONDS=60
+      - USE_ORDERING_MENU=false
+      - DIFY_REQUIRED=true
+      - DIFY_FALLBACK_ON_ERROR=true
+      - USE_DIFY_LLM_BRIDGE=true
+      - HOME_STORE_NAME=风味餐厅
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost}
+    ports:
+      - "8001:8001"
+
+  # ============ Nginx (前端 + 反代) ============
+  nginx:
+    image: nginx:alpine
+    container_name: restaurant-nginx
+    restart: unless-stopped
+    ports:
+      - "${PORT:-80}:80"
+    volumes:
+      - frontend_dist:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      builder:
+        condition: service_completed_successfully
+      agent:
+        condition: service_started
+
+volumes:
+  frontend_dist:

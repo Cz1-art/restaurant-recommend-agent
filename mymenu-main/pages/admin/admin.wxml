@@ -1,0 +1,162 @@
+<!--pages/admin/admin.wxml-->
+<view class="container">
+  <!-- 权限不足（顾客） -->
+  <view wx:if="{{!isStaff}}" class="no-permission">
+    <view class="no-perm-icon">🔒</view>
+    <view class="no-perm-title">权限不足</view>
+    <view class="no-perm-desc">当前账号没有管理权限</view>
+  </view>
+
+  <view wx:else>
+    <!-- 角色头部 -->
+    <view class="role-header">
+      <view class="role-badge role-{{role}}">{{roleName}}</view>
+      <view class="logout-btn" bindtap="logout">退出登录</view>
+    </view>
+
+    <!-- 管理员：菜品管理 + 分类 + 订单 -->
+    <view wx:if="{{role === 'admin'}}">
+      <view class="admin-section">
+        <view class="section-title">菜品管理</view>
+        <view class="dish-manage-list">
+          <view class="dish-manage-item card" wx:for="{{dishes}}" wx:key="id">
+            <image class="dish-thumb" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="dish-manage-info">
+              <view class="dish-manage-name">{{item.name}}</view>
+              <view class="dish-manage-meta">
+                <text class="dish-manage-price">¥{{item.price}}</text>
+                <text wx:if="{{item.flavor}}" class="dish-flavor-tag">{{item.flavor}}</text>
+              </view>
+              <view class="dish-manage-category">{{item.category_name || '未分类'}}</view>
+            </view>
+            <view class="dish-manage-actions">
+              <text class="action-btn edit" bindtap="editDish" data-dish="{{item}}">编辑</text>
+              <text class="action-btn delete" bindtap="deleteDish" data-id="{{item.id}}">删除</text>
+            </view>
+          </view>
+        </view>
+        <view class="add-dish-btn" bindtap="showAddDish">+ 添加菜品</view>
+        <view class="add-dish-btn" style="margin-top:20rpx;background:#fff;color:#ff6b35;border:2rpx solid #ff6b35;" bindtap="goCategory">管理分类</view>
+      </view>
+    </view>
+
+    <!-- 订单区域（管理员/服务员/厨师通用） -->
+    <view class="admin-section">
+      <view class="section-title">{{role === 'admin' ? '订单管理' : '订单处理'}}</view>
+      <scroll-view scroll-x class="order-tabs">
+        <view class="order-tab-list">
+          <view wx:for="{{tabs}}" wx:key="key"
+            class="order-tab-item {{currentTab === item.key ? 'active' : ''}}"
+            bindtap="switchTab" data-tab="{{item.key}}">{{item.name}}</view>
+        </view>
+      </scroll-view>
+      <view class="order-list" wx:if="{{orders.length > 0}}">
+        <view class="order-item card" wx:for="{{orders}}" wx:key="id">
+          <view class="order-header">
+            <text class="order-id">#{{item.order_no}}</text>
+            <text class="order-status status-{{item.status}}">{{getStatusText(item.status)}}</text>
+          </view>
+          <view class="order-content">
+            <view class="order-dish" wx:for="{{item.items}}" wx:for-item="d" wx:key="id">
+              <text>{{d.dish_name}} × {{d.quantity}}</text>
+              <text class="dish-total">¥{{d.subtotal}}</text>
+            </view>
+            <view wx:if="{{item.remark}}" class="order-remark">📝 {{item.remark}}</view>
+          </view>
+          <view class="order-footer">
+            <text class="order-time">用户#{{item.user_id}} {{item.created_at}}</text>
+            <text class="order-total">¥{{item.total_price}}</text>
+          </view>
+          <!-- 员工：制作中/已完成操作 -->
+          <view wx:if="{{role === 'staff' && (item.status === 'paid' || item.status === 'cooking')}}" class="order-actions">
+            <view wx:if="{{item.status === 'paid'}}" class="action-btn chef-btn" bindtap="updateOrderStatus" data-id="{{item.id}}" data-status="cooking">开始制作</view>
+            <view wx:if="{{item.status === 'cooking'}}" class="action-btn chef-btn done-btn" bindtap="updateOrderStatus" data-id="{{item.id}}" data-status="done">完成制作</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="empty-tip-orders">暂无订单</view>
+    </view>
+  </view>
+
+    <!-- 餐桌管理（管理员） -->
+    <view wx:if="{{role === 'admin'}}" class="admin-section">
+      <view class="section-title">🍽️ 餐桌管理</view>
+      <view class="table-grid">
+        <view class="table-card" wx:for="{{tables}}" wx:key="id">
+          <view class="table-no">{{item.table_no}}</view>
+          <view class="table-cap">{{item.capacity}}人桌</view>
+          <view class="table-status status-{{item.status}}">{{item.status === 'free' ? '空闲' : item.status === 'occupied' ? '已占用' : '已预订'}}</view>
+          <view class="table-actions">
+            <text class="action-btn edit" bindtap="openTableModal" data-table="{{item}}">编辑</text>
+            <text class="action-btn delete" bindtap="deleteTable" data-id="{{item.id}}">删除</text>
+          </view>
+        </view>
+      </view>
+      <view class="add-dish-btn" bindtap="openTableModal">+ 添加餐桌</view>
+    </view>
+
+  <!-- 餐桌编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showTableModal && role === 'admin'}}" bindtap="closeTableModal"></view>
+  <view class="modal-content" wx:if="{{showTableModal && role === 'admin'}}">
+    <view class="modal-title">{{editingTableId ? '编辑餐桌' : '添加餐桌'}}</view>
+    <view class="form-group">
+      <view class="form-label">桌号</view>
+      <input class="form-input" placeholder="如：大厅1号桌" value="{{tableForm.table_no}}" bindinput="onTableNoInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">容纳人数</view>
+      <input class="form-input" type="number" placeholder="4" value="{{tableForm.capacity}}" bindinput="onTableCapacityInput"/>
+    </view>
+    <view class="modal-actions">
+      <view class="modal-btn cancel" bindtap="closeTableModal">取消</view>
+      <view class="modal-btn confirm" bindtap="saveTable">保存</view>
+    </view>
+  </view>
+
+  <!-- 菜品编辑弹窗（仅管理员） -->
+  <view class="modal-mask" wx:if="{{showDishModal && role === 'admin'}}" bindtap="closeDishModal"></view>
+  <view class="modal-content dish-modal" wx:if="{{showDishModal && role === 'admin'}}">
+    <view class="modal-title">{{isEditDish ? '编辑菜品' : '添加菜品'}}</view>
+    <view class="form-group">
+      <view class="form-label">菜品名称</view>
+      <input class="form-input" placeholder="请输入菜品名称" value="{{dishForm.name}}" bindinput="onDishNameInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">价格</view>
+      <input class="form-input" type="digit" placeholder="请输入价格" value="{{dishForm.price}}" bindinput="onDishPriceInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">分类</view>
+      <picker mode="selector" range="{{categories}}" range-key="name" bindchange="onCategoryChange">
+        <view class="picker-value">{{selectedCategoryName || '请选择分类'}}</view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <view class="form-label">描述</view>
+      <input class="form-input" placeholder="请输入描述" value="{{dishForm.description}}" bindinput="onDescInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">口味</view>
+      <picker mode="selector" range="{{flavorOptions}}" bindchange="onFlavorChange">
+        <view class="picker-value {{selectedFlavorIndex === -1 ? 'placeholder' : ''}}">
+          {{selectedFlavorIndex >= 0 ? flavorOptions[selectedFlavorIndex] : '请选择口味'}}
+        </view>
+      </picker>
+    </view>
+    <view class="form-group">
+      <view class="form-label">食材原料</view>
+      <input class="form-input" placeholder="请输入食材原料" value="{{dishForm.ingredients}}" bindinput="onIngredientsInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">图片</view>
+      <view class="image-picker" bindtap="chooseImage">
+        <image wx:if="{{dishForm.image}}" src="{{dishForm.image}}" mode="aspectFill"></image>
+        <text wx:else>+ 点击上传图片</text>
+      </view>
+    </view>
+    <view class="modal-actions">
+      <view class="modal-btn cancel" bindtap="closeDishModal">取消</view>
+      <view class="modal-btn confirm" bindtap="saveDish">保存</view>
+    </view>
+  </view>
+</view>
