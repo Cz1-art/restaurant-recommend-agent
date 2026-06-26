@@ -32,11 +32,20 @@ export interface ToolCallRecord {
 export interface RecommendChatResponse {
   reply: string;
   recommended_dishes: RecommendedDish[];
+  recommended_foods?: {
+    name: string;
+    address?: string;
+    distance_m?: number;
+    type?: string;
+    tel?: string;
+    reason?: string;
+  }[];
   nearby_restaurants: NearbyRestaurant[];
   map_image_url?: string | null;
   intent?: string;
   tool_calls?: ToolCallRecord[];
   citations?: { title?: string; quote?: string; source_name?: string }[];
+  data_source?: string;
 }
 
 export function sendRecommendChat(payload: RecommendChatRequest): Promise<RecommendChatResponse> {
