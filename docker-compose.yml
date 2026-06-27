@@ -33,7 +33,7 @@ services:
       - DIFY_FALLBACK_ON_ERROR=true
       - USE_DIFY_LLM_BRIDGE=true
       - HOME_STORE_NAME=风味餐厅
-      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost}
+      - CORS_ORIGINS=["http://75.127.89.235"]
     ports:
       - "8001:8001"
 
